@@ -37,7 +37,7 @@ Where:
 * (L_a): armature inductance
 * (R_a): armature resistance
 * (i): armature current
-* (e_b = K_e \omega): back EMF
+* (e_b = K_b \omega): back EMF
 
 ---
 
@@ -78,59 +78,10 @@ The Simulink implementation consists of:
 ### State Variables
 
 [
-x_1 = i(t), \quad x_2 = \omega(t)
+x_1 = i(t), \quad x_2 = \omega(t) \quad x_3 = \theta(t)
 ]
 
-### State Equations
 
-[
-\frac{d}{dt}
-\begin{bmatrix}
-i \
-\omega
-\end{bmatrix}
-=============
-
-\begin{bmatrix}
--\frac{R_a}{L_a} & -\frac{K_e}{L_a} \
-\frac{K_t}{J} & -\frac{B}{J}
-\end{bmatrix}
-\begin{bmatrix}
-i \
-\omega
-\end{bmatrix}
-+
-\begin{bmatrix}
-\frac{1}{L_a} \
-0
-\end{bmatrix}
-V_a
-]
-
-### Output Equation
-
-[
-y = [0 \quad 1]
-\begin{bmatrix}
-i \
-\omega
-\end{bmatrix}
-]
-
----
-
-## PID Controller Design
-
-A PID controller is applied to regulate motor speed:
-
-[
-u(t) = K_p e(t) + K_i \int e(t) dt + K_d \frac{de(t)}{dt}
-]
-
-Where:
-
-* (e(t)): speed error
-* (u(t)): control voltage
 
 ### Tuning Approach
 
@@ -167,7 +118,7 @@ Performance metrics:
 ## How to Run
 
 1. Open the `.slx` Simulink model
-2. Set motor parameters (R, L, J, B, (K_t), (K_e))
+2. Set motor parameters (R, L, J, B, (K_t), (K_b))
 3. Configure PID gains
 4. Run simulation
 5. Observe speed response and system behavior
